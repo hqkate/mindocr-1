@@ -151,6 +151,9 @@ class Evaluator:
 
                 preds = self.postprocessor(preds, **data_info)
 
+            with open("predictions.txt", "w") as f:
+                f.write("\n".join([a + "\t" + b for a, b in zip(gt, preds)]))
+
             # metric internal update
             for m in self.metrics:
                 m.update(preds, gt)
